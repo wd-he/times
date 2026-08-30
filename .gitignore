@@ -1,0 +1,13 @@
+.idea/
+.pnpm-store/
+.DS_Store
+.codex_temp/
+data/
+build/
+frontend/node_modules/
+node_modules/
+frontend/.umi/
+frontend/.umi-production/
+frontend/src/.umi*/
+frontend/src/.umi-production/
+frontend/dist

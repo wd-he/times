@@ -1,0 +1,24 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: 启动前后端开发环境
+    cmds:
+      - ./scripts/dev.sh
+  build:
+    desc: 构建当前平台生产产物
+    cmds:
+      - ./scripts/build.sh
+  build:linux:
+    desc: 使用 Docker 构建 Linux 生产二进制
+    cmds:
+      - ./scripts/build-linux.sh
+  test:
+    desc: 运行后端测试和前端类型检查
+    cmds:
+      - GOCACHE="$PWD/.codex_temp/go-cache" GOMODCACHE="$PWD/.codex_temp/go-mod" go test . ./internal/... ./frontend
+      - cd frontend && pnpm run typecheck
+  frontend:build:
+    desc: 构建前端嵌入资源
+    cmds:
+      - cd frontend && pnpm run build

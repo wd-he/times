@@ -1,0 +1,9 @@
+.git
+.codex_temp
+build
+data
+frontend/.umi
+frontend/.umi-production
+frontend/dist
+frontend/node_modules
+node_modules

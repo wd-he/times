@@ -1,0 +1,12 @@
+.form { margin-top: 0; }
+.form :global(.ant-form-item) { margin-bottom: 16px; }
+.timeFields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.datetime { width: 100%; }
+.quickSection { margin-top: 2px; padding: 16px; border: 1px solid #e8edf3; border-radius: 12px; background: #f8fafc; }
+.quickTitle { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.quick { width: 100%; margin-top: 10px; }
+.actions { margin-top: 20px; }
+
+@media (max-width: 640px) {
+  .timeFields { grid-template-columns: 1fr; gap: 0; }
+}

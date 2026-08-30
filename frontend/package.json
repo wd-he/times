@@ -1,0 +1,24 @@
+{
+  "name": "times",
+  "private": true,
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ant-design/plots": "latest",
+    "@ant-design/icons": "latest",
+    "@umijs/max": "latest",
+    "antd": "latest",
+    "dayjs": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest",
+    "umi": "latest"
+  }
+}

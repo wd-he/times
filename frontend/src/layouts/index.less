@@ -1,0 +1,15 @@
+.shell { height: 100vh; overflow: hidden; overscroll-behavior: none; background: #f4f7fb; }
+.sider { height: 100vh; overflow-x: hidden; overflow-y: auto; overscroll-behavior: none; background: #10253f !important; }
+.mainLayout { height: 100vh; min-height: 0; min-width: 0; overflow: hidden; overscroll-behavior: none; }
+.brand { height: 48px; padding: 0 18px; display: flex; align-items: center; gap: 8px; color: #fff; font-size: 17px; font-weight: 700; }
+.brandMark { flex: 0 0 auto; font-size: 24px; line-height: 1; }
+.sider:global(.ant-layout-sider-collapsed) .brand { padding: 0; justify-content: center; }
+.sider:global(.ant-layout-sider-collapsed) .brand > span:last-child { display: none; }
+.sider :global(.ant-menu-item .ant-menu-item-icon) { font-size: 16px; }
+.siderFooter { position: absolute; bottom: 25px; width: 100%; text-align: center; color: #7890ad; font-size: 12px; }
+.header { height: 48px; min-height: 48px; line-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; background: #fff; border-bottom: 1px solid #e8edf3; }
+.headerUser { margin-left: auto; }
+.avatar { background: #e6f7f3; color: #27a38d; }
+.userInfo { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; line-height: 1.2; }
+.content { min-height: 0; min-width: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: none; padding: 24px; width: 100%; box-sizing: border-box; }
+.loading { height: 100vh; display: grid; place-items: center; background: #f4f7fb; }
