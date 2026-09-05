@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Card, Empty, Modal, Popconfirm, Segmented, Select, Space, Table, Tag, Typography, message } from 'antd';
 import type { TableColumnsType } from 'antd';
-import { DeleteOutlined, DownloadOutlined, EyeOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, DownloadOutlined, EyeOutlined, PlayCircleOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import dayjs, { Dayjs } from 'dayjs';
 import EventForm from '@/components/EventForm';
 import PageHeader from '@/components/PageHeader';
@@ -77,6 +77,7 @@ export default function EventsPage() {
   }, [range, userId]);
 
   const remove = async (id: number) => { try { await api.deleteEvent(id); message.success('事件已删除'); load(); } catch (reason) { message.error(reason instanceof Error ? reason.message : '删除失败'); } };
+  const continueEvent = (event: EventItem) => { window.dispatchEvent(new CustomEvent('times:open-event-create', { detail: { event } })); };
   const exportCSV = async () => {
     try {
       setCsvLoading(true);
@@ -121,7 +122,7 @@ export default function EventsPage() {
   ];
   const columns: TableColumnsType<EventItem> = [
     ...detailColumns,
-    ...(!isAdmin ? [{ title: '操作', key: 'action', width: 140, render: (_: unknown, item: EventItem) => <Space size={4}><Button type="text" icon={<EyeOutlined />} onClick={() => setViewEvent(item)}>查看</Button><Popconfirm title="确认删除这条事件？" onConfirm={() => remove(item.id)}><Button type="text" danger icon={<DeleteOutlined />}>删除</Button></Popconfirm></Space> }] : [])
+    ...(!isAdmin ? [{ title: '操作', key: 'action', width: 300, onCell: () => ({ style: { paddingRight: 16, whiteSpace: 'nowrap' as const, textAlign: 'left' as const } }), render: (_: unknown, item: EventItem) => <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}><Button type="text" icon={<EyeOutlined />} onClick={() => setViewEvent(item)}>查看</Button><Button type="text" icon={<PlayCircleOutlined />} onClick={() => continueEvent(item)}>继续此事件</Button><Popconfirm title="确认删除这条事件？" onConfirm={() => remove(item.id)}><Button type="text" danger icon={<DeleteOutlined />}>删除</Button></Popconfirm></div> }] : [])
   ];
   const groupColumns: TableColumnsType<GroupedEvent> = groupMode === 'day' ? [
     { title: '日期', dataIndex: 'day', key: 'day', width: 150 },

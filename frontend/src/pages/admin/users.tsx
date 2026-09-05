@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Card, Form, Input, Modal, Popconfirm, Space, Table, Tag, Typography, message } from 'antd';
 import { CopyOutlined, LinkOutlined, PlusOutlined, ReloadOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
+import copy from 'copy-to-clipboard';
 import PageHeader from '@/components/PageHeader';
 import { api, setToken, User } from '@/services/api';
 
@@ -29,7 +30,7 @@ export default function UsersPage() {
     setTokenInfo({ ...tokenInfo, token: result.token });
     return result.token;
   };
-  const copyAndClose = async (createText: (token: string) => string) => { try { const token = await persistToken(); await navigator.clipboard?.writeText(createText(token)); setTokenInfo(undefined); message.success('已复制'); } catch (reason) { message.error(reason instanceof Error ? reason.message : '复制失败'); } };
+  const copyAndClose = async (createText: (token: string) => string) => { try { const token = await persistToken(); if (!copy(createText(token))) throw new Error('复制失败'); setTokenInfo(undefined); message.success('已复制'); } catch (reason) { message.error(reason instanceof Error ? reason.message : '复制失败'); } };
   const showToken = tokenInfo ? <Modal open title="请安全保存 token" onCancel={() => setTokenInfo(undefined)} footer={<Space><Button icon={<LinkOutlined />} onClick={() => void copyAndClose((token) => { const link = new URL('/', window.location.href); link.searchParams.set('token', token); return link.toString(); })}>复制授权链接</Button><Button type="primary" icon={<CopyOutlined />} onClick={() => void copyAndClose((token) => token)}>复制并关闭</Button></Space>}><Typography.Paragraph>token 只展示这一次，可以修改短横线后面的尾缀。</Typography.Paragraph><Input addonBefore={`${tokenInfo.username}-`} value={tokenInfo.suffix} maxLength={64} onChange={(event) => setTokenInfo({ ...tokenInfo, suffix: event.target.value })} /><Typography.Paragraph code style={{ marginTop: 12, marginBottom: 0 }}>{`${tokenInfo.username}-${tokenInfo.suffix}`}</Typography.Paragraph></Modal> : null;
 
   const columns = [

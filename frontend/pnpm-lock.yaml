@@ -20,6 +20,9 @@ importers:
       antd:
         specifier: latest
         version: 6.6.2(date-fns@2.30.0)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      copy-to-clipboard:
+        specifier: 3.3.3
+        version: 3.3.3
       dayjs:
         specifier: latest
         version: 1.11.23

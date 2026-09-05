@@ -17,7 +17,7 @@ function defaultValues() {
   return { started_at: dayjs().subtract(1, 'hour'), completed_at: dayjs(), description: '' };
 }
 
-export default function EventForm({ event, continuous = false, onSaved, onCancel }: { event?: EventItem; continuous?: boolean; onSaved?: (mode: EventSaveMode) => void; onCancel?: () => void }) {
+export default function EventForm({ event, initialEvent, continuous = false, onSaved, onCancel }: { event?: EventItem; initialEvent?: EventItem; continuous?: boolean; onSaved?: (mode: EventSaveMode) => void; onCancel?: () => void }) {
   const [form] = Form.useForm<FormValue>();
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
@@ -30,10 +30,12 @@ export default function EventForm({ event, continuous = false, onSaved, onCancel
   useEffect(() => {
     if (event) {
       form.setFieldsValue({ major_category_id: event.major_category_id, sub_category_id: event.sub_category_id, description: event.description, started_at: dayjs(event.started_at), completed_at: dayjs(event.completed_at) });
+    } else if (initialEvent) {
+      form.setFieldsValue({ ...defaultValues(), major_category_id: initialEvent.major_category_id, sub_category_id: initialEvent.sub_category_id, description: initialEvent.description });
     } else {
       form.setFieldsValue(defaultValues());
     }
-  }, [event, form]);
+  }, [event, initialEvent, form]);
 
   const quickTime = (type: string) => {
     const now = dayjs();

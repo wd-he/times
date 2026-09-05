@@ -11,6 +11,7 @@
     "@ant-design/icons": "latest",
     "@umijs/max": "latest",
     "antd": "latest",
+    "copy-to-clipboard": "3.3.3",
     "dayjs": "latest",
     "react": "latest",
     "react-dom": "latest"

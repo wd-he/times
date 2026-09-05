@@ -84,9 +84,10 @@ function requestHeaders(contentType?: string, source?: HeadersInit) {
 function redirectAfterAuthFailure(status: number) {
   if (status === 401) {
     clearToken();
-    history.replace('/login');
+    if (window.location.pathname !== '/login') history.replace('/login');
   } else if (status === 403) {
-    history.replace(localStorage.getItem('times_role') === 'admin' ? '/admin/users' : '/events');
+    const target = localStorage.getItem('times_role') === 'admin' ? '/admin/users' : '/events';
+    if (window.location.pathname !== target) history.replace(target);
   }
 }
 
