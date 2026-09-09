@@ -25,7 +25,7 @@ func Load() Config {
 		timezoneName = location.String()
 	}
 	return Config{
-		Address:        envOr("TIMES_ADDR", "127.0.0.1:8080"),
+		Address:        envOr("TIMES_ADDR", "0.0.0.0:8080"),
 		DatabasePath:   envOr("TIMES_DB_PATH", "data/times.db"),
 		AdminTokenPath: envOr("TIMES_ADMIN_TOKEN_PATH", "data/admin.token"),
 		LogPath:        envOr("TIMES_LOG_PATH", "data/times.log"),
